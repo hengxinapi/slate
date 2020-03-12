@@ -222,13 +222,21 @@
           </li>
           <li>
             <a href="#hengxin-kernel" class="toc-h1 toc-link" data-title="部署 Hengxin Kernel">部署 Hengxin Kernel</a>
-          </li>
-          <li>
-            <a href="#hengxin-wallet" class="toc-h1 toc-link" data-title="部署 Hengxin Wallet">部署 Hengxin Wallet</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#hengxin-kernel-2" class="toc-h2 toc-link" data-title="部署Hengxin Kernel流程:">部署Hengxin Kernel流程:</a>
+                  </li>
+                  <li>
+                    <a href="#hengxin-kernel-gateway" class="toc-h2 toc-link" data-title="部署 Hengxin Kernel Gateway:">部署 Hengxin Kernel Gateway:</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#hengxin-wallet-2" class="toc-h1 toc-link" data-title="接入 Hengxin Wallet">接入 Hengxin Wallet</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#f4bf10698e" class="toc-h2 toc-link" data-title="银行接入:">银行接入:</a>
+                  </li>
                   <li>
                     <a href="#auth" class="toc-h2 toc-link" data-title="Auth">Auth</a>
                   </li>
@@ -269,9 +277,17 @@
 <p>其中Hengxin Kernel即恒信主网，负责处理所有的链上事物，对外提供稳定的区块链服务；Hengxin Wallet是基于Hengxin Kernel的热钱包，它托管了用户私钥，为用户同步Snapshot，以及生成Transaction。对于普通用户来说，使用Hengxin Wallet可以完全不了解区块链知识而实现数据上链的需求。</p>
 <h1 id='hengxin-kernel'>部署 Hengxin Kernel</h1>
 <p>Hengxin Kernel 作为Hengxin Network的底层链，其测试网络已经平稳运营了超过一年，产生了1500多万条snapshot。Hengxin Kernel包含两部分，其一为核心链，其二为Hengxin Network Kernel，向外提供REST 接口。</p>
-
-<p><strong>部署Hengxin Kernel流程:</strong></p>
-
+<h2 id='hengxin-kernel-2'>部署Hengxin Kernel流程:</h2>
+<blockquote>
+<p>配置文件模版 config.template.json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"cache-ttl"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"listener"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1:7001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"max-cache-size"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"signer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf80380abb0011dbe573a462b81e591defc04f8ea5021eccb5b7f1de9794c701"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <ol>
 <li>创建一台Linux主机，建议配置在8核 32G内存 200G ssd硬盘以上</li>
 <li>Hengxin将下发Kernel可执行文件: hxkernel</li>
@@ -281,38 +297,42 @@
 <li>配置节点运行，/usr/local/hxkernel kernel -dir /home/hengxin/hxkernel/hxkernel -port 7001</li>
 </ol>
 
-<p><strong>config.template.json:</strong></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"cache-ttl"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"listener"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1:7001"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"max-cache-size"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf80380abb0011dbe573a462b81e591defc04f8ea5021eccb5b7f1de9794c701"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p><strong>部署 Hengxin Kernel Gateway:</strong></p>
-
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cache-ttl</td>
+<td>缓存的生存周期</td>
+</tr>
+<tr>
+<td>listener</td>
+<td>监听端口</td>
+</tr>
+<tr>
+<td>max-cache-size</td>
+<td>最大缓存大小</td>
+</tr>
+<tr>
+<td>signer</td>
+<td>签名密钥</td>
+</tr>
+</tbody></table>
+<h2 id='hengxin-kernel-gateway'>部署 Hengxin Kernel Gateway:</h2>
 <ol>
 <li>Hengxin 将下发 Hengxin Kernel Gateway可执行文件</li>
 <li>各节点方部署运行: <strong><em>./hxkernel-gw server --port 8081 --kernel-node http://localhost:8001</em></strong></li>
 </ol>
 
 <p><strong>注意，kernel-node的端口为kernel的端口 + 1000。</strong> 如上述kernel使用了7001端口，此处则为8001。</p>
-<h1 id='hengxin-wallet'>部署 Hengxin Wallet</h1>
+<h3 id='hengxin-wallet'>部署 Hengxin Wallet</h3>
 <p>Hengxin Wallet是Hengxin实现的一个热钱包。热钱包实现了私钥托管，同步UTXO，消费UTXO的功能。通过REST接口，可以轻松完成链上资源读，写。</p>
-
-<p><strong>部署流程:</strong></p>
-
-<ol>
-<li>创建数据库服务器，创建数据库，以及配置数据库账号</li>
-<li>Hengxin将下发Hengxin Wallet可执行文件</li>
-<li>使用 hxkernel createaddress 随机生成新的view key，记录下来</li>
-<li>按照配置文件模版生成配置文件 config.yaml</li>
-<li>部署运行 Hengxin Wallet Worker, 运行指令 <strong>./hxwallet worker --config config.yaml</strong></li>
-<li>部署运行 Hengxin Wallet Server, 运行指令 <strong>./hxwallet server --config config.yaml --port 8082</strong></li>
-<li>运行createuser command以创建根用户并保管好私钥信息，将地址信息发送给Hengxin，Hengxin将为该地址发送足够的余额以进行链的写入操作</li>
-</ol>
-
-<p><strong>配置文件模版:</strong></p>
+<h3 id='78a31b3a3a'>部署流程：</h3>
+<blockquote>
+<p>配置文件模版 config.yaml</p>
+</blockquote>
 <pre class="highlight yaml tab-yaml"><code><span class="na">db</span><span class="pi">:</span>
   <span class="na">dialect</span><span class="pi">:</span> <span class="s">mysql</span> <span class="c1"># mysql, sqlite3</span>
   <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
@@ -330,18 +350,26 @@
   <span class="na">verify_auth_token</span><span class="pi">:</span> <span class="s">false</span>
   <span class="na">verify_request_sig</span><span class="pi">:</span> <span class="s">false</span>
 </code></pre>
-<p><strong>Create User:</strong></p>
+<ol>
+<li>创建数据库服务器，创建数据库，以及配置数据库账号</li>
+<li>Hengxin将下发Hengxin Wallet可执行文件</li>
+<li>使用 hxkernel createaddress 随机生成新的view key，记录下来</li>
+<li>按照配置文件模版生成配置文件 config.yaml</li>
+<li>部署运行 Hengxin Wallet Worker, 运行指令 <strong>./hxwallet worker --config config.yaml</strong></li>
+<li>部署运行 Hengxin Wallet Server, 运行指令 <strong>./hxwallet server --config config.yaml --port 8082</strong></li>
+<li>运行createuser command以创建根用户并保管好私钥信息，将地址信息发送给Hengxin，Hengxin将为该地址发送足够的余额以进行链的写入操作</li>
+</ol>
+
+<blockquote>
+<p>创建用户</p>
+</blockquote>
 <pre class="highlight shell tab-shell"><code>./hxwallet createuser --config config.yaml
 
 user id: f6c86fe8-ff97-3c64-8e3a-bacdef6b2bed
 address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5XWsKUsc2Uq4cKkjeKJT7Nkv8RF2z2fohLn9QG56y5PYd3vFqyMaDEbGUfAXonbHpnnbXBMbixKc38F2dHMBXuQffTwXkpQ5Scvsi42f6i3VGy4R4bqvnnysZACmAC3Y7ycS129Dyh1njV2xzYJ9erz
-</code></pre><h1 id='hengxin-wallet-2'>接入 Hengxin Wallet</h1>
-<p><strong>银行接入:</strong></p>
-
+</code></pre><h1 id='hengxin-wallet-2'>接入 Hengxin Wallet</h1><h2 id='f4bf10698e'>银行接入:</h2>
 <p>银行将部署Hengxin Wallet时创建的用户Address及需要开展的业务提交给Hengxin，Hengxin将为该银行的相应业务生成专属Asset，并将Asset信息发送给银行以及应急中心。</p>
-
-<p><strong>上链流程:</strong></p>
-
+<h3 id='93c917fb2f'>上链流程:</h3>
 <ol>
 <li>当用户A在银行B完成了 开户操作，将开户结果发送给应急中心</li>
 <li>应急中心查出银行B的开户业务的专属Asset</li>
@@ -356,12 +384,32 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <p>请求时，添加Http Header &quot;Authorization: Basic base64(user_id)&quot;, <strong>根用户的user_id在上述部署阶段生成</strong></p>
 <h2 id='06fe1ed225'>链上数据结构</h2>
 <p>Hengxin Network的Transaction中，可以自定义的设置Memo，长度最大为5120。在eKYC系统中，Memo为json marshal的字符串，结构如:</p>
-<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="s2">"t"</span><span class="p">:</span><span class="s2">"reg"</span><span class="p">,</span> <span class="c1">// type</span>
-  <span class="s2">"d"</span><span class="p">:</span><span class="s2">"{}"</span>   <span class="c1">// data</span>
-  <span class="s2">"h"</span><span class="p">:</span> <span class="s2">"raw_data_hash"</span> <span class="c1">// sha256(原始数据)</span>
-<span class="p">}</span>
-</code></pre><h2 id='6d25fafca5'>创建新地址</h2><h3 id='http-request'>HTTP Request</h3>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"t"</span><span class="p">:</span><span class="s2">"reg"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"d"</span><span class="p">:</span><span class="s2">"{}"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"h"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw_data_hash"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>t</td>
+<td>type</td>
+</tr>
+<tr>
+<td>d</td>
+<td>data</td>
+</tr>
+<tr>
+<td>h</td>
+<td>sha256(原始数据)</td>
+</tr>
+</tbody></table>
+<h2 id='6d25fafca5'>创建新地址</h2><h3 id='http'>HTTP 请求</h3>
 <p><code>POST /users</code></p>
 
 <blockquote>
@@ -371,17 +419,42 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T22:21:13.321112+08:00"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXxxx"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">在生成Transaction时使用</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXxxx"</span><span class="w"> 
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='transaction'>提交 Transaction</h2><h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST /transactions</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+</span></code></pre>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created_at</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</td>
+</tr>
+<tr>
+<td>address</td>
+<td>在生成Transaction时使用</td>
+</tr>
+</tbody></table>
+<h2 id='transaction'>提交 Transaction</h2><h3 id='http-2'>HTTP 请求</h3>
+<p><code>POST /transactions</code></p>
+<h3 id='query'>Query 参数</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"opponent_addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">],</span><span class="w"> 
+  </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">t</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">reg</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">d</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">{}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">h</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">xxxx</span><span class="se">\"</span><span class="s2">}"</span><span class="w"> </span><span class="err">//</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>描述</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -397,12 +470,7 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>链上数据，此数据为公开可见数据，不建议添加隐私数据</td>
 </tr>
 </tbody></table>
-<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="s2">"asset"</span><span class="p">:</span> <span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span>
-  <span class="s2">"opponent_addresses"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">],</span> 
-  <span class="s2">"memo"</span><span class="p">:</span> <span class="s2">"{\"t\":\"reg\",\"d\":\"{}\",\"h\":\"xxxx\"}"</span> <span class="c1">// </span>
-<span class="p">}</span>
-</code></pre>
+
 <blockquote>
 <p>接口返回的JSON:</p>
 </blockquote>
@@ -412,13 +480,25 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
     </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d259a9cbe49eccd7878112e291e378fee7c08af0b443c598b1fbc091d7345fc"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='e16cc3633c'>读取 记账记录列表</h2><h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET /snapshots</code></p>
-<h3 id='form-parameters'>Form Parameters</h3>
+</span></code></pre>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tx_hash</td>
+<td>Transaction Hash 值</td>
+</tr>
+</tbody></table>
+<h2 id='e16cc3633c'>读取 记账记录列表</h2><h3 id='http-3'>HTTP 请求</h3>
+<p><code>GET /snapshots?asset = b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8&amp;from=1&amp;limit=1&amp;order=ASC</code></p>
+<h3 id='query-2'>Query 参数</h3>
+<table><thead>
+<tr>
+<th>键</th>
+<th>描述</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -438,11 +518,7 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>排序方式</td>
 </tr>
 </tbody></table>
-<pre class="highlight plaintext"><code>asset = b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8 # 
-from = 1  
-limit = 1  
-order = ASC
-</code></pre>
+
 <blockquote>
 <p>接口返回的JSON结构:</p>
 </blockquote>
@@ -453,14 +529,50 @@ order = ASC
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T13:17:37Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c852a70d-86ca-3832-b7ab-bbfdf68bc39b"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000001"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">正数时为用户接收到transaction；负数时为用户发起的transaction</span><span class="w">
-      </span><span class="s2">"opponent_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c95a14b8-14fe-3228-aa2b-a28c88bd1591"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">optional，指向transaction的对方。若用户为接收方则指向发起方，若用户为发起方则指向接收方。只有opponent私钥托管在Hengxin</span><span class="w"> </span><span class="err">Wallet时，此字段才会有数值。</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000001"</span><span class="p">,</span><span class="w"> 
+      </span><span class="s2">"opponent_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c95a14b8-14fe-3228-aa2b-a28c88bd1591"</span><span class="p">,</span><span class="w"> 
       </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Hengxin</span><span class="w"> </span><span class="err">Wallet中的snapshot深度</span><span class="p">,</span><span class="w"> </span><span class="err">下次查询时</span><span class="w">
+      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"> 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created_at</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>asset</td>
+<td>资产类型</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>金额数量 正数时为用户接收到transaction；负数时为用户发起的transaction</td>
+</tr>
+<tr>
+<td>opponent_id</td>
+<td>接收方 optional，指向transaction的对方。若用户为接收方则指向发起方，若用户为发起方则指向接收方。只有opponent私钥托管在Hengxin Wallet时，此字段才会有数值。</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>备注</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Hengxin Wallet中的snapshot深度, 下次查询时</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
