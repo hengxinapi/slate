@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>恒信网络API文档</title>
+    <title>恒信API文档</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -218,39 +218,51 @@
             <a href="#d90d3f5583" class="toc-h1 toc-link" data-title="恒信简介">恒信简介</a>
           </li>
           <li>
-            <a href="#hengxin-network" class="toc-h1 toc-link" data-title="部署 Hengxin Network">部署 Hengxin Network</a>
-          </li>
-          <li>
-            <a href="#hengxin-kernel" class="toc-h1 toc-link" data-title="部署 Hengxin Kernel">部署 Hengxin Kernel</a>
+            <a href="#kernel" class="toc-h1 toc-link" data-title="恒信 Kernel">恒信 Kernel</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#hengxin-kernel-2" class="toc-h2 toc-link" data-title="部署Hengxin Kernel流程:">部署Hengxin Kernel流程:</a>
+                    <a href="#hengxin-kernel" class="toc-h2 toc-link" data-title="部署 Hengxin Kernel">部署 Hengxin Kernel</a>
                   </li>
                   <li>
-                    <a href="#hengxin-kernel-gateway" class="toc-h2 toc-link" data-title="部署 Hengxin Kernel Gateway:">部署 Hengxin Kernel Gateway:</a>
+                    <a href="#hengxin-kernel-gateway" class="toc-h2 toc-link" data-title="部署 Hengxin Kernel Gateway">部署 Hengxin Kernel Gateway</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#hengxin-wallet-2" class="toc-h1 toc-link" data-title="接入 Hengxin Wallet">接入 Hengxin Wallet</a>
-              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#hengxin-wallet" class="toc-h2 toc-link" data-title="接入 Hengxin Wallet">接入 Hengxin Wallet</a>
+                  </li>
                   <li>
                     <a href="#f4bf10698e" class="toc-h2 toc-link" data-title="银行接入:">银行接入:</a>
                   </li>
                   <li>
-                    <a href="#auth" class="toc-h2 toc-link" data-title="Auth">Auth</a>
-                  </li>
-                  <li>
                     <a href="#06fe1ed225" class="toc-h2 toc-link" data-title="链上数据结构">链上数据结构</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#wallet" class="toc-h1 toc-link" data-title="恒信 Wallet">恒信 Wallet</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#6d25fafca5" class="toc-h2 toc-link" data-title="创建新地址">创建新地址</a>
+                    <a href="#5ea2e0cde2" class="toc-h2 toc-link" data-title="简介">简介</a>
                   </li>
                   <li>
-                    <a href="#transaction" class="toc-h2 toc-link" data-title="提交 Transaction">提交 Transaction</a>
+                    <a href="#2677e6145a" class="toc-h2 toc-link" data-title="编译和部署工程">编译和部署工程</a>
                   </li>
                   <li>
-                    <a href="#e16cc3633c" class="toc-h2 toc-link" data-title="读取 记账记录列表">读取 记账记录列表</a>
+                    <a href="#1da6708ecc" class="toc-h2 toc-link" data-title="鉴权">鉴权</a>
+                  </li>
+                  <li>
+                    <a href="#api" class="toc-h2 toc-link" data-title="获取用户信息 API">获取用户信息 API</a>
+                  </li>
+                  <li>
+                    <a href="#api-2" class="toc-h2 toc-link" data-title="创建用户 API">创建用户 API</a>
+                  </li>
+                  <li>
+                    <a href="#transaction-api" class="toc-h2 toc-link" data-title="提交 Transaction API">提交 Transaction API</a>
+                  </li>
+                  <li>
+                    <a href="#api-3" class="toc-h2 toc-link" data-title="内转转账 API">内转转账 API</a>
+                  </li>
+                  <li>
+                    <a href="#api-4" class="toc-h2 toc-link" data-title="读取记账记录列表 API">读取记账记录列表 API</a>
                   </li>
               </ul>
           </li>
@@ -264,20 +276,23 @@
 
 <p>与其他区块链项目不同，Hengxin Network从一开始就兼顾了隐私保护。Hengxin Network上的地址都包含三对公私钥：Private View Key / Public View Key, Private Spend Key / Public Spend Key, Private Encrypt Key / Public Encrypt Key。其中, Public View Key, Public Spend Key 以及 Public Encrypt Key构成了Address。只有持有了相应的私钥，才可以分辨出指向该地址的记录:</p>
 
-<ol>
-<li>若持有某Address，则可以向该Address发送Transaction</li>
-<li>若持有某Address的Private View Key，则可以识别出链上所有指向该Address的UTXO</li>
-<li>若持有某Address的Private View Key 以及 Private Spend Key，则可以消费与该Address相关的UTXO</li>
-</ol>
+<p>若持有某Address，则可以向该Address发送Transaction
+若持有某Address的Private View Key，则可以识别出链上所有指向该Address的UTXO
+若持有某Address的Private View Key 以及 Private Spend Key，则可以消费与该Address相关的UTXO
+另外，Hengxin Network中亦引入了Asset概念。实际使用中，可以使用不同的Asset来区分不同的业务方。</p>
 
-<p>另外，Hengxin Network中亦引入了Asset概念。实际使用中，可以使用不同的Asset来区分不同的业务方。</p>
-<h1 id='hengxin-network'>部署 Hengxin Network</h1>
-<p>Hengxin Network 包含 Hengxin Kernel以及Hengxin Wallet热钱包两部分。</p>
+<p>Hengxin Network是 Hengxin 的无币区块链解决方案，采取了数据链下加密存储，数据文件hash上链的方式，提供了一套完整的无币区块链解决方案。</p>
 
-<p>其中Hengxin Kernel即恒信主网，负责处理所有的链上事物，对外提供稳定的区块链服务；Hengxin Wallet是基于Hengxin Kernel的热钱包，它托管了用户私钥，为用户同步Snapshot，以及生成Transaction。对于普通用户来说，使用Hengxin Wallet可以完全不了解区块链知识而实现数据上链的需求。</p>
-<h1 id='hengxin-kernel'>部署 Hengxin Kernel</h1>
+<p>恒信网络有以下两个部分组成<br>
+ 1. Hengxin Kernel<br>
+ 2. Hengxin Wallet   </p>
+
+<p>本文档主要介绍如何部署恒信网络中的 Hengxin Kernel以及Hengxin Wallet热钱包。</p>
+<h1 id='kernel'>恒信 Kernel</h1>
+<p>Hengxin Kernel即恒信主网，负责处理所有的链上事物，对外提供稳定的区块链服务；</p>
+<h2 id='hengxin-kernel'>部署 Hengxin Kernel</h2>
 <p>Hengxin Kernel 作为Hengxin Network的底层链，其测试网络已经平稳运营了超过一年，产生了1500多万条snapshot。Hengxin Kernel包含两部分，其一为核心链，其二为Hengxin Network Kernel，向外提供REST 接口。</p>
-<h2 id='hengxin-kernel-2'>部署Hengxin Kernel流程:</h2>
+<h3 id='hengxin-kernel-2'>部署Hengxin Kernel流程:</h3>
 <blockquote>
 <p>配置文件模版 config.template.json</p>
 </blockquote>
@@ -320,54 +335,14 @@
 <td>签名密钥</td>
 </tr>
 </tbody></table>
-<h2 id='hengxin-kernel-gateway'>部署 Hengxin Kernel Gateway:</h2>
+<h2 id='hengxin-kernel-gateway'>部署 Hengxin Kernel Gateway</h2>
 <ol>
 <li>Hengxin 将下发 Hengxin Kernel Gateway可执行文件</li>
 <li>各节点方部署运行: <strong><em>./hxkernel-gw server --port 8081 --kernel-node http://localhost:8001</em></strong></li>
 </ol>
 
 <p><strong>注意，kernel-node的端口为kernel的端口 + 1000。</strong> 如上述kernel使用了7001端口，此处则为8001。</p>
-<h3 id='hengxin-wallet'>部署 Hengxin Wallet</h3>
-<p>Hengxin Wallet是Hengxin实现的一个热钱包。热钱包实现了私钥托管，同步UTXO，消费UTXO的功能。通过REST接口，可以轻松完成链上资源读，写。</p>
-<h3 id='78a31b3a3a'>部署流程：</h3>
-<blockquote>
-<p>配置文件模版 config.yaml</p>
-</blockquote>
-<pre class="highlight yaml tab-yaml"><code><span class="na">db</span><span class="pi">:</span>
-  <span class="na">dialect</span><span class="pi">:</span> <span class="s">mysql</span> <span class="c1"># mysql, sqlite3</span>
-  <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
-  <span class="na">host_read</span><span class="pi">:</span> <span class="s">localhost</span>
-  <span class="na">port</span><span class="pi">:</span> <span class="s">3306</span>
-  <span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
-  <span class="na">password</span><span class="pi">:</span>
-  <span class="na">database</span><span class="pi">:</span> <span class="s">hxwallet</span>
-  <span class="na">debug</span><span class="pi">:</span> <span class="s">true</span>
-
-
-<span class="na">kernel_node</span><span class="pi">:</span> <span class="s">http://localhost:8081</span> <span class="c1"># kernel gateway</span>
-
-<span class="na">server</span><span class="pi">:</span>
-  <span class="na">verify_auth_token</span><span class="pi">:</span> <span class="s">false</span>
-  <span class="na">verify_request_sig</span><span class="pi">:</span> <span class="s">false</span>
-</code></pre>
-<ol>
-<li>创建数据库服务器，创建数据库，以及配置数据库账号</li>
-<li>Hengxin将下发Hengxin Wallet可执行文件</li>
-<li>使用 hxkernel createaddress 随机生成新的view key，记录下来</li>
-<li>按照配置文件模版生成配置文件 config.yaml</li>
-<li>部署运行 Hengxin Wallet Worker, 运行指令 <strong>./hxwallet worker --config config.yaml</strong></li>
-<li>部署运行 Hengxin Wallet Server, 运行指令 <strong>./hxwallet server --config config.yaml --port 8082</strong></li>
-<li>运行createuser command以创建根用户并保管好私钥信息，将地址信息发送给Hengxin，Hengxin将为该地址发送足够的余额以进行链的写入操作</li>
-</ol>
-
-<blockquote>
-<p>创建用户</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>./hxwallet createuser --config config.yaml
-
-user id: f6c86fe8-ff97-3c64-8e3a-bacdef6b2bed
-address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5XWsKUsc2Uq4cKkjeKJT7Nkv8RF2z2fohLn9QG56y5PYd3vFqyMaDEbGUfAXonbHpnnbXBMbixKc38F2dHMBXuQffTwXkpQ5Scvsi42f6i3VGy4R4bqvnnysZACmAC3Y7ycS129Dyh1njV2xzYJ9erz
-</code></pre><h1 id='hengxin-wallet-2'>接入 Hengxin Wallet</h1><h2 id='f4bf10698e'>银行接入:</h2>
+<h2 id='hengxin-wallet'>接入 Hengxin Wallet</h2><h2 id='f4bf10698e'>银行接入:</h2>
 <p>银行将部署Hengxin Wallet时创建的用户Address及需要开展的业务提交给Hengxin，Hengxin将为该银行的相应业务生成专属Asset，并将Asset信息发送给银行以及应急中心。</p>
 <h3 id='93c917fb2f'>上链流程:</h3>
 <ol>
@@ -380,8 +355,6 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 </ol>
 
 <p>对于应急中心来说，当完成了第5步，即完成了链的写入操作。</p>
-<h2 id='auth'>Auth</h2>
-<p>请求时，添加Http Header &quot;Authorization: Basic base64(user_id)&quot;, <strong>根用户的user_id在上述部署阶段生成</strong></p>
 <h2 id='06fe1ed225'>链上数据结构</h2>
 <p>Hengxin Network的Transaction中，可以自定义的设置Memo，长度最大为5120。在eKYC系统中，Memo为json marshal的字符串，结构如:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -409,18 +382,201 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>sha256(原始数据)</td>
 </tr>
 </tbody></table>
-<h2 id='6d25fafca5'>创建新地址</h2><h3 id='http'>HTTP 请求</h3>
-<p><code>POST /users</code></p>
+<h1 id='wallet'>恒信 Wallet</h1><h2 id='5ea2e0cde2'>简介</h2>
+<p>Hengxin Wallet作为Hengxin Network的热钱包，提供创建地址，发送transaction，以及获取地址snapshot列表的功能。<br>
+Hengxin Wallet分为两部分，worker &amp; server，其中worker将同步所有链上snapshot，并映射到对应的地址；server则对外提供rest接口。</p>
+<h2 id='2677e6145a'>编译和部署工程</h2>
+<p>钱包工程需要首先编译成二进制运行文件，需要安装Go依赖库</p>
 
+<p>安装 Go 语言<a href="https://golang.org/doc/install">Go Install</a></p>
+
+<p><code>
+go install github.com/fox-one/hxwallet
+</code></p>
+
+<blockquote>
+<p>配置文件模版 config.yaml</p>
+</blockquote>
+<pre class="highlight yaml tab-yaml"><code><span class="na">db</span><span class="pi">:</span>
+  <span class="na">dialect</span><span class="pi">:</span> <span class="s">mysql</span> <span class="c1"># mysql, sqlite3</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
+  <span class="na">host_read</span><span class="pi">:</span> <span class="s">localhost</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="s">3306</span>
+  <span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">password</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span> <span class="s">hxwallet</span>
+  <span class="na">debug</span><span class="pi">:</span> <span class="s">true</span>
+
+
+<span class="na">kernel_node</span><span class="pi">:</span> <span class="s">http://localhost:8081</span> <span class="c1"># kernel gateway</span>
+
+<span class="na">server</span><span class="pi">:</span>
+  <span class="na">verify_auth_token</span><span class="pi">:</span> <span class="s">false</span>
+  <span class="na">verify_request_sig</span><span class="pi">:</span> <span class="s">false</span>
+</code></pre><h3 id='b29b49ee3c'>钱包的运行</h3>
+<p>复制config.template.yaml到config.yaml，并适当配置。</p>
+<h3 id='43ae086cea'>设置数据库</h3>
+<p><code>./hxwallet setdb --config config.local.yaml</code></p>
+<h3 id='4de27a2f5a'>创建系统跟账号</h3>
+<blockquote>
+<p>Shell 返回结果</p>
+</blockquote>
+<pre class="highlight shell"><code>user id: 6e5afa15-eb51-3d58-87cb-70dda3231df0
+address: HXvrMpQKfFNTnLFSuGULugcsLxxxMWV3qBUnWc2HH81RhAdXKtUNxFnfoN7qXaNqs6LGgx1JL6ry1nd9sKjMDoRFJUjw6QRLJW9D7meogsdYHjWYEZKWVJzbMN6v5wYHxYnraimXzebPt772279NFQe6mWBFWwytTwU9mWxBXBmXV1JywPewNmZzGVYG8vHa8ySrbss9oU6Eso5CpG13rdJeV32
+keystore: HXKSxUSRLudmJ4yxr7aC6Nq4Q1RPVim9woufmxyUGmvWcMizDshdvBiqWq54qj6TX7K592xzoy1vyrhRodnqSwGQzH4ZW7gKaF3K4EqNy8UNUo6DfsZoLzRH8jwP9e5K7xT316zX1zNSmmcfCobUJ4CfFR44poW3VwZweUFzwvGiMmkqGhpm5gKyXN53vaqAciVReBFzfEdEyAQiBm5oFbTfB5kBz1bUFJ3BJbfz1Ac6MauFpzotToYJD85fDCtxfEKekj
+</code></pre>
+<p><code>./hxwallet createuser --config config.local.yaml</code></p>
+
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user id</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>address</td>
+<td>地址</td>
+</tr>
+<tr>
+<td>keystore</td>
+<td>私钥</td>
+</tr>
+</tbody></table>
+
+<p>此账号作为系统账号，将address提供给kernel运行方，运行方将会提供足够的balance以使得系统可以正常运转。</p>
+<h3 id='work'>启动Work</h3>
+<p><code>./hxwallet worker --debug --config config.local.yaml</code></p>
+<h3 id='server'>启动Server</h3>
+<p><code>./hxwallet server --debug --config config.local.yaml --port 8082</code></p>
+<h2 id='1da6708ecc'>鉴权</h2>
+<p>Hengxin Wallet实现了两种鉴权，</p>
+
+<ol>
+<li>Basic: &quot;Authorization: Basic base64(user_id)&quot;<br></li>
+<li>JWT: &quot;Authorization: Bearer jwt_token&quot;<br></li>
+</ol>
+
+<p>若配置文件中开启了verify_auth_token, 则必须使用Bearer方式；否则两种皆可。</p>
+<h3 id='jwt-token'>JWT Token</h3>
+<p>JWT 的签名算法使用了国家标准密码算法.</p>
+
+<p><a href="https://jwt.io/">访问了解JWT</a><br>
+<a href="http://www.oscca.gov.cn/sca/index.shtml">访问了解国家标准密码</a>   </p>
+
+<blockquote>
+<p>Header:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SM2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>alg</td>
+<td>使用的签名算法类型</td>
+</tr>
+<tr>
+<td>typ</td>
+<td>token 的种类</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Payload:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1584064554</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583978154</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXy9YaTXHcNcQUXAHS2sBFX2A8yd2zEiePL4Bo5ZmwRGtgXbtnv142aja1Qw4k8m1pWfPaSS4cddx8GjDDdUFV5hgHZT1M5VrRBVsiiGb4iU953i9M9tKhUXWtZFKKZHaNWNnAiMnsVHUifyubY5Mm5PtqwJDNNzU2hYt1Mtqvhcd8ZnJwBeNygvgjicnBajr52ZjKPtd85bezMnVUFCrK4iUDn"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"nc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"__uuid__"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sig"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="p">,</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>exp</td>
+<td>token过期时间。Unix Timestamp, 以s为单位</td>
+</tr>
+<tr>
+<td>iat</td>
+<td>token签发时间，为当前时间即可。Unix Timestamp, 以s为单位</td>
+</tr>
+<tr>
+<td>iss</td>
+<td>根用户的 address</td>
+</tr>
+<tr>
+<td>nc</td>
+<td>每次生成一个唯一值</td>
+</tr>
+<tr>
+<td>sig</td>
+<td>optional. request signature，sm3.hash(METHOD+URI+BODY)，注意，URI不包含host，例如sms.hash(&quot;GET/snapshots&quot;)。若Wallet未开启verify_request_signature，则&quot;sig&quot;可以唯恐</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Token 生成的方法:</p>
+</blockquote>
+<pre class="highlight go tab-go"><code><span class="k">func</span><span class="x"> </span><span class="n">GenerateToken</span><span class="p">(</span><span class="n">ekInPEM</span><span class="p">,</span><span class="x"> </span><span class="n">address</span><span class="x"> </span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">expires</span><span class="x"> </span><span class="kt">int64</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">block</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">pem</span><span class="o">.</span><span class="n">Decode</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">ekInPEM</span><span class="p">))</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">block</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"failed to decode private key"</span><span class="p">)</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+  </span><span class="n">ek</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">sm2</span><span class="o">.</span><span class="n">ParsePKCS8PrivateKey</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">Bytes</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+
+  </span><span class="n">header</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">`{"alg":"SM2","typ":"JWT"}`</span><span class="x">
+  </span><span class="n">iat</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">Unix</span><span class="p">()</span><span class="x">
+  </span><span class="n">payload</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">`{"exp":%d,"iat":%d,"iss":"%s"}`</span><span class="p">,</span><span class="x"> </span><span class="n">iat</span><span class="o">+</span><span class="n">expires</span><span class="p">,</span><span class="x"> </span><span class="n">iat</span><span class="p">,</span><span class="x"> </span><span class="n">address</span><span class="p">)</span><span class="x">
+
+  </span><span class="n">signedData</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Join</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="x">
+    </span><span class="n">strings</span><span class="o">.</span><span class="n">TrimRight</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">URLEncoding</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">header</span><span class="p">)),</span><span class="x"> </span><span class="s">"="</span><span class="p">),</span><span class="x">
+    </span><span class="n">strings</span><span class="o">.</span><span class="n">TrimRight</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">URLEncoding</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">payload</span><span class="p">)),</span><span class="x"> </span><span class="s">"="</span><span class="p">),</span><span class="x">
+  </span><span class="p">},</span><span class="x"> </span><span class="s">"."</span><span class="p">)</span><span class="x">
+
+  </span><span class="n">hasher</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">sm3</span><span class="o">.</span><span class="n">New</span><span class="p">()</span><span class="x">
+  </span><span class="n">hasher</span><span class="o">.</span><span class="n">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">signedData</span><span class="p">))</span><span class="x">
+
+  </span><span class="n">sig</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">ek</span><span class="o">.</span><span class="n">Sign</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">Reader</span><span class="p">,</span><span class="x"> </span><span class="n">hasher</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="no">nil</span><span class="p">),</span><span class="x"> </span><span class="no">nil</span><span class="p">)</span><span class="x">
+  </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x">
+  </span><span class="p">}</span><span class="x">
+
+  </span><span class="k">return</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Join</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="x">
+    </span><span class="n">signedData</span><span class="p">,</span><span class="x">
+    </span><span class="n">strings</span><span class="o">.</span><span class="n">TrimRight</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">URLEncoding</span><span class="o">.</span><span class="n">EncodeToString</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="n">sig</span><span class="p">)),</span><span class="x"> </span><span class="s">"="</span><span class="p">),</span><span class="x">
+  </span><span class="p">},</span><span class="x"> </span><span class="s">"."</span><span class="p">),</span><span class="x"> </span><span class="no">nil</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre><h2 id='api'>获取用户信息 API</h2><h3 id='http'>HTTP 请求</h3>
+<p><code>GET /info</code></p>
+<h3 id='6483dab423'>返回值</h3>
 <blockquote>
 <p>接口返回的JSON结构:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T22:21:13.321112+08:00"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXxxx"</span><span class="w"> 
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-12T02:15:11Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -431,24 +587,64 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 </tr>
 </thead><tbody>
 <tr>
+<td>user_id</td>
+<td>在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</td>
+</tr>
+<tr>
 <td>created_at</td>
 <td>创建时间</td>
 </tr>
+<tr>
+<td>address</td>
+<td>获取用户的地址</td>
+</tr>
+</tbody></table>
+<h2 id='api-2'>创建用户 API</h2><h3 id='http-2'>HTTP 请求</h3>
+<p><code>POST /users</code></p>
+<h3 id='6483dab423-2'>返回值</h3>
+<blockquote>
+<p>接口返回的JSON结构:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T22:21:13.321112+08:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"keystore"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXKS7ET32Wgs4JntsxqewKMPQTR19EAxjFtxMhVvUMAP6uu2nxYZUtLgJMmNA6nv1Jr7eVWdEJxSrn1ggjVjEYarPEKpiogyNvHrLKX5sZcnsdeYYgYT2uK9KZJayNHJ3u7bJfSuKB7ZoXcPMst8fuSCMPjmFLq5h3dN8i6pLK2RFVuXbAYiAsDfxrPK7aiXZgq71u8FxEgszVjZn2HBezVFtUmy6VhdRcNSYgnNevmhiKWYG4aVpJtFDQ1xJi6yWnaENh"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>user_id</td>
 <td>在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</td>
 </tr>
 <tr>
+<td>created_at</td>
+<td>创建时间</td>
+</tr>
+<tr>
 <td>address</td>
 <td>在生成Transaction时使用</td>
 </tr>
+<tr>
+<td>keystore</td>
+<td>用户的私钥</td>
+</tr>
 </tbody></table>
-<h2 id='transaction'>提交 Transaction</h2><h3 id='http-2'>HTTP 请求</h3>
+<h2 id='transaction-api'>提交 Transaction API</h2><h3 id='http-3'>HTTP 请求</h3>
 <p><code>POST /transactions</code></p>
 <h3 id='query'>Query 参数</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"opponent_addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">],</span><span class="w"> 
-  </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">t</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">reg</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">d</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">{}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">h</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">xxxx</span><span class="se">\"</span><span class="s2">}"</span><span class="w"> </span><span class="err">//</span><span class="w"> 
+  </span><span class="s2">"opponent_addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"trace_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">  
+  </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">t</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">reg</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">d</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">{}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">h</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">xxxx</span><span class="se">\"</span><span class="s2">}"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <table><thead>
@@ -466,13 +662,17 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>指向用户Address，银行Address，同时还可以添加其他监管机构Address，如金融局地址</td>
 </tr>
 <tr>
+<td>trace_id</td>
+<td>任意字符串，最大长度为36。在Hengxin Wallet内唯一，从而保证一个Transaction只能被记录一次。实际使用中，可以根据业务的信息来生成，这样在请求失败之后可以重复提交保证数据上链成功，而又不会发生重复上链的事件</td>
+</tr>
+<tr>
 <td>memo</td>
 <td>链上数据，此数据为公开可见数据，不建议添加隐私数据</td>
 </tr>
 </tbody></table>
-
+<h3 id='6483dab423-3'>返回值</h3>
 <blockquote>
-<p>接口返回的JSON:</p>
+<p>接口返回的JSON结构:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -492,7 +692,66 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>Transaction Hash 值</td>
 </tr>
 </tbody></table>
-<h2 id='e16cc3633c'>读取 记账记录列表</h2><h3 id='http-3'>HTTP 请求</h3>
+<h2 id='api-3'>内转转账 API</h2><h3 id='http-4'>HTTP 请求</h3>
+<p><code>POST /transfer</code></p>
+<h3 id='749d765242'>参数</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"opponent_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c95a14b8-14fe-3228-aa2b-a28c88bd1591"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"trace_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">   
+  </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset</td>
+<td>资产类型</td>
+</tr>
+<tr>
+<td>opponent_id</td>
+<td>transaction接收方user_id</td>
+</tr>
+<tr>
+<td>trace_id</td>
+<td>任意字符串，最大长度为36。在Hengxin Wallet内唯一，从而保证一个Transaction只能被记录一次。实际使用中，可以根据业务的信息来生成，这样在请求失败之后可以重复提交保证数据上链成功，而又不会发生重复上链的事件</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>备注</td>
+</tr>
+</tbody></table>
+<h3 id='6483dab423-4'>返回值</h3>
+<blockquote>
+<p>接口返回的JSON结构:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"trace_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d259a9cbe49eccd7878112e291e378fee7c08af0b443c598b1fbc091d7345fc"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>键</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>trace_id</td>
+<td>用于追溯</td>
+</tr>
+<tr>
+<td>tx_hash</td>
+<td>链上 Hash 地址</td>
+</tr>
+</tbody></table>
+<h2 id='api-4'>读取记账记录列表 API</h2><h3 id='http-5'>HTTP 请求</h3>
 <p><code>GET /snapshots?asset = b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8&amp;from=1&amp;limit=1&amp;order=ASC</code></p>
 <h3 id='query-2'>Query 参数</h3>
 <table><thead>
@@ -518,7 +777,7 @@ address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5X
 <td>排序方式</td>
 </tr>
 </tbody></table>
-
+<h3 id='6483dab423-5'>返回值</h3>
 <blockquote>
 <p>接口返回的JSON结构:</p>
 </blockquote>
