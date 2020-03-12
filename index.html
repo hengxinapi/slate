@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>恒信网络API文档</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -196,192 +196,225 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+    <link href="stylesheets/screen-a1ce949a.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch-c275c2f6.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;go&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" alt="Navbar" />
+        <img src="images/navbar-cad8cdcb.png" alt="Navbar" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <img src="images/logo-1185a994.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="go">go</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#d90d3f5583" class="toc-h1 toc-link" data-title="恒信简介">恒信简介</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#hengxin-network" class="toc-h1 toc-link" data-title="部署 Hengxin Network">部署 Hengxin Network</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#hengxin-kernel" class="toc-h1 toc-link" data-title="部署 Hengxin Kernel">部署 Hengxin Kernel</a>
+          </li>
+          <li>
+            <a href="#hengxin-wallet" class="toc-h1 toc-link" data-title="部署 Hengxin Wallet">部署 Hengxin Wallet</a>
+          </li>
+          <li>
+            <a href="#hengxin-wallet-2" class="toc-h1 toc-link" data-title="接入 Hengxin Wallet">接入 Hengxin Wallet</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#auth" class="toc-h2 toc-link" data-title="Auth">Auth</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#06fe1ed225" class="toc-h2 toc-link" data-title="链上数据结构">链上数据结构</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#6d25fafca5" class="toc-h2 toc-link" data-title="创建新地址">创建新地址</a>
+                  </li>
+                  <li>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="提交 Transaction">提交 Transaction</a>
+                  </li>
+                  <li>
+                    <a href="#e16cc3633c" class="toc-h2 toc-link" data-title="读取 记账记录列表">读取 记账记录列表</a>
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='d90d3f5583'>恒信简介</h1>
+<p>Hengxin Network是使用有向无环图实现的分布式账簿系统。在Hengxin Network中，每一次记账行为就是往主网上发送了一次Transaction；主网将为每一个被确认了的Transaction生成一个快照Snapshot。基于Snapshot，各个节点构建了有向无环图，从而实现了高效，低功耗的分布式账簿系统。</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>与其他区块链项目不同，Hengxin Network从一开始就兼顾了隐私保护。Hengxin Network上的地址都包含三对公私钥：Private View Key / Public View Key, Private Spend Key / Public Spend Key, Private Encrypt Key / Public Encrypt Key。其中, Public View Key, Public Spend Key 以及 Public Encrypt Key构成了Address。只有持有了相应的私钥，才可以分辨出指向该地址的记录:</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<ol>
+<li>若持有某Address，则可以向该Address发送Transaction</li>
+<li>若持有某Address的Private View Key，则可以识别出链上所有指向该Address的UTXO</li>
+<li>若持有某Address的Private View Key 以及 Private Spend Key，则可以消费与该Address相关的UTXO</li>
+</ol>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>另外，Hengxin Network中亦引入了Asset概念。实际使用中，可以使用不同的Asset来区分不同的业务方。</p>
+<h1 id='hengxin-network'>部署 Hengxin Network</h1>
+<p>Hengxin Network 包含 Hengxin Kernel以及Hengxin Wallet热钱包两部分。</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>其中Hengxin Kernel即恒信主网，负责处理所有的链上事物，对外提供稳定的区块链服务；Hengxin Wallet是基于Hengxin Kernel的热钱包，它托管了用户私钥，为用户同步Snapshot，以及生成Transaction。对于普通用户来说，使用Hengxin Wallet可以完全不了解区块链知识而实现数据上链的需求。</p>
+<h1 id='hengxin-kernel'>部署 Hengxin Kernel</h1>
+<p>Hengxin Kernel 作为Hengxin Network的底层链，其测试网络已经平稳运营了超过一年，产生了1500多万条snapshot。Hengxin Kernel包含两部分，其一为核心链，其二为Hengxin Network Kernel，向外提供REST 接口。</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p><strong>部署Hengxin Kernel流程:</strong></p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<ol>
+<li>创建一台Linux主机，建议配置在8核 32G内存 200G ssd硬盘以上</li>
+<li>Hengxin将下发Kernel可执行文件: hxkernel</li>
+<li>使用可执行文件，创建两组私钥(payee，signer)，并将signer的public spend key发送给Hengxin: <strong><em>./hxkernel createaddress --public</em></strong></li>
+<li>Hengxin收集齐了所有public spend key之后，将向各节点下发genesis.json, 以及 nodes.json文件</li>
+<li>各节点方将按照模版生成config.json，并将其与genesis.json, nodes.json放置在同一目录</li>
+<li>配置节点运行，/usr/local/hxkernel kernel -dir /home/hengxin/hxkernel/hxkernel -port 7001</li>
+</ol>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<p><strong>config.template.json:</strong></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"cache-ttl"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"listener"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1:7001"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"max-cache-size"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"signer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bf80380abb0011dbe573a462b81e591defc04f8ea5021eccb5b7f1de9794c701"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><strong>部署 Hengxin Kernel Gateway:</strong></p>
+
+<ol>
+<li>Hengxin 将下发 Hengxin Kernel Gateway可执行文件</li>
+<li>各节点方部署运行: <strong><em>./hxkernel-gw server --port 8081 --kernel-node http://localhost:8001</em></strong></li>
+</ol>
+
+<p><strong>注意，kernel-node的端口为kernel的端口 + 1000。</strong> 如上述kernel使用了7001端口，此处则为8001。</p>
+<h1 id='hengxin-wallet'>部署 Hengxin Wallet</h1>
+<p>Hengxin Wallet是Hengxin实现的一个热钱包。热钱包实现了私钥托管，同步UTXO，消费UTXO的功能。通过REST接口，可以轻松完成链上资源读，写。</p>
+
+<p><strong>部署流程:</strong></p>
+
+<ol>
+<li>创建数据库服务器，创建数据库，以及配置数据库账号</li>
+<li>Hengxin将下发Hengxin Wallet可执行文件</li>
+<li>使用 hxkernel createaddress 随机生成新的view key，记录下来</li>
+<li>按照配置文件模版生成配置文件 config.yaml</li>
+<li>部署运行 Hengxin Wallet Worker, 运行指令 <strong>./hxwallet worker --config config.yaml</strong></li>
+<li>部署运行 Hengxin Wallet Server, 运行指令 <strong>./hxwallet server --config config.yaml --port 8082</strong></li>
+<li>运行createuser command以创建根用户并保管好私钥信息，将地址信息发送给Hengxin，Hengxin将为该地址发送足够的余额以进行链的写入操作</li>
+</ol>
+
+<p><strong>配置文件模版:</strong></p>
+<pre class="highlight yaml tab-yaml"><code><span class="na">db</span><span class="pi">:</span>
+  <span class="na">dialect</span><span class="pi">:</span> <span class="s">mysql</span> <span class="c1"># mysql, sqlite3</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
+  <span class="na">host_read</span><span class="pi">:</span> <span class="s">localhost</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="s">3306</span>
+  <span class="na">user</span><span class="pi">:</span> <span class="s">root</span>
+  <span class="na">password</span><span class="pi">:</span>
+  <span class="na">database</span><span class="pi">:</span> <span class="s">hxwallet</span>
+  <span class="na">debug</span><span class="pi">:</span> <span class="s">true</span>
+
+
+<span class="na">kernel_node</span><span class="pi">:</span> <span class="s">http://localhost:8081</span> <span class="c1"># kernel gateway</span>
+
+<span class="na">server</span><span class="pi">:</span>
+  <span class="na">verify_auth_token</span><span class="pi">:</span> <span class="s">false</span>
+  <span class="na">verify_request_sig</span><span class="pi">:</span> <span class="s">false</span>
+</code></pre>
+<p><strong>Create User:</strong></p>
+<pre class="highlight shell tab-shell"><code>./hxwallet createuser --config config.yaml
+
+user id: f6c86fe8-ff97-3c64-8e3a-bacdef6b2bed
+address: HX2XmbfUqaANYWSPCh2ZcGrBE1Z7pjkrsWufowGPPBVnvaNLbTQvmY6W7KWgUKbxBV1oZ5XWsKUsc2Uq4cKkjeKJT7Nkv8RF2z2fohLn9QG56y5PYd3vFqyMaDEbGUfAXonbHpnnbXBMbixKc38F2dHMBXuQffTwXkpQ5Scvsi42f6i3VGy4R4bqvnnysZACmAC3Y7ycS129Dyh1njV2xzYJ9erz
+</code></pre><h1 id='hengxin-wallet-2'>接入 Hengxin Wallet</h1>
+<p><strong>银行接入:</strong></p>
+
+<p>银行将部署Hengxin Wallet时创建的用户Address及需要开展的业务提交给Hengxin，Hengxin将为该银行的相应业务生成专属Asset，并将Asset信息发送给银行以及应急中心。</p>
+
+<p><strong>上链流程:</strong></p>
+
+<ol>
+<li>当用户A在银行B完成了 开户操作，将开户结果发送给应急中心</li>
+<li>应急中心查出银行B的开户业务的专属Asset</li>
+<li>应急中心按照规则生成链上数据</li>
+<li>应急中心生成一个指向用户A的Address，银行B的Address（以及各监管方的Address，如金融局等）的Transaction，附带上相应数据，发送到主网</li>
+<li>主网收到Transaction后确认，并生成相应的Snapshot</li>
+<li>银行A 收到对应Transaction时，向应急中心请求对应数据，与memo中的hash比对，完成数据审计</li>
+</ol>
+
+<p>对于应急中心来说，当完成了第5步，即完成了链的写入操作。</p>
+<h2 id='auth'>Auth</h2>
+<p>请求时，添加Http Header &quot;Authorization: Basic base64(user_id)&quot;, <strong>根用户的user_id在上述部署阶段生成</strong></p>
+<h2 id='06fe1ed225'>链上数据结构</h2>
+<p>Hengxin Network的Transaction中，可以自定义的设置Memo，长度最大为5120。在eKYC系统中，Memo为json marshal的字符串，结构如:</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"t"</span><span class="p">:</span><span class="s2">"reg"</span><span class="p">,</span> <span class="c1">// type</span>
+  <span class="s2">"d"</span><span class="p">:</span><span class="s2">"{}"</span>   <span class="c1">// data</span>
+  <span class="s2">"h"</span><span class="p">:</span> <span class="s2">"raw_data_hash"</span> <span class="c1">// sha256(原始数据)</span>
+<span class="p">}</span>
+</code></pre><h2 id='6d25fafca5'>创建新地址</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /users</code></p>
+
+<blockquote>
+<p>接口返回的JSON结构:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T22:21:13.321112+08:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c54d04f-585a-3c0b-869f-6e63f6912410"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">在访问该用户资源(如snapshot列表)时使用，通过user_id完成用户鉴权</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HXxxx"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">在生成Transaction时使用</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='transaction'>提交 Transaction</h2><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST /transactions</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>asset</td>
+<td>资产类型</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>opponent_addresses</td>
+<td>指向用户Address，银行Address，同时还可以添加其他监管机构Address，如金融局地址</td>
+</tr>
+<tr>
+<td>memo</td>
+<td>链上数据，此数据为公开可见数据，不建议添加隐私数据</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"asset"</span><span class="p">:</span> <span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span>
+  <span class="s2">"opponent_addresses"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"HX266NGnUZ5HmXzzgBW4C1asDcPGqxteTJZu9EaoFUGLxT6KZEcH96bNE1L4zqy3neBbjdZLScbr1vMM8rB186qrHFERetcwY36ecxW1yToJG3MZ6gw3Pf4oGx7NyELanCzNWbnRL8NmjoRQsuUtPKEgXegoq5oh6yyJ5y9prH43gTj7zjYxgkkcvnGj9osFkKb9vk6q4nDGL5vtpa63kUjV6oSe"</span><span class="p">],</span> 
+  <span class="s2">"memo"</span><span class="p">:</span> <span class="s2">"{\"t\":\"reg\",\"d\":\"{}\",\"h\":\"xxxx\"}"</span> <span class="c1">// </span>
+<span class="p">}</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>接口返回的JSON:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"tx_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d259a9cbe49eccd7878112e291e378fee7c08af0b443c598b1fbc091d7345fc"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+</span></code></pre><h2 id='e16cc3633c'>读取 记账记录列表</h2><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /snapshots</code></p>
+<h3 id='form-parameters'>Form Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -389,115 +422,49 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>asset</td>
+<td>可选，若为空则查询所有</td>
+</tr>
+<tr>
+<td>from</td>
+<td>上一条snapshot深度。ASC时，查询height &gt; from的数据; DESC时查询height &lt; from的数据</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>返回数据条目。最大 500</td>
+</tr>
+<tr>
+<td>order</td>
+<td>排序方式</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<pre class="highlight plaintext"><code>asset = b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8 # 
+from = 1  
+limit = 1  
+order = ASC
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>接口返回的JSON结构:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-05T13:17:37Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b9f49cf777dc4d03bc54cd1367eebca319f8603ea1ce18910d09e2c540c630d8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c852a70d-86ca-3832-b7ab-bbfdf68bc39b"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000001"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">正数时为用户接收到transaction；负数时为用户发起的transaction</span><span class="w">
+      </span><span class="s2">"opponent_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c95a14b8-14fe-3228-aa2b-a28c88bd1591"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">optional，指向transaction的对方。若用户为接收方则指向发起方，若用户为发起方则指向接收方。只有opponent私钥托管在Hengxin</span><span class="w"> </span><span class="err">Wallet时，此字段才会有数值。</span><span class="w">
+      </span><span class="s2">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Hengxin</span><span class="w"> </span><span class="err">Wallet中的snapshot深度</span><span class="p">,</span><span class="w"> </span><span class="err">下次查询时</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
-
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="go">go</a>
           </div>
       </div>
     </div>
